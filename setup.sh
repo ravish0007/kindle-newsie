@@ -12,9 +12,8 @@ sudo apt install -y wget
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 sudo apt install -y python3-pip
 
-which ebook-convert > /dev/null
 
-if [ $? != 0 ]; then
+if [ ! -f  /opt/calibre/ebook-convert ]; then
     echo "Installation failed" ; exit 1
 fi
 
