@@ -5,10 +5,11 @@ user=$(whoami)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 
-############################ Setup calibre
+############################ Setup calibre (latest)
 
 sudo apt install -y wget
-sudo apt install -y calibre
+#sudo apt install -y calibre
+sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 sudo apt install -y python3-pip
 
 which ebook-convert > /dev/null
