@@ -22,3 +22,6 @@ News and Magazines to your ebook reader.
    
  ## Credits
  [Calibre](https://github.com/kovidgoyal/calibre)
+ 
+ ## Extra
+ [Bake your own recipe](https://manual.calibre-ebook.com/news.html)
