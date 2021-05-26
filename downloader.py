@@ -4,13 +4,25 @@ import yagmail
 from datetime import datetime
 import configparser
 
-base_dir, _    =  os.path.split(os.path.realpath(__file__))
-recipes_dir = base_dir + os.path.sep + 'recipes'
-docs_dir    = base_dir + os.path.sep + 'docs'
+base_dir, _  = os.path.split(os.path.realpath(__file__))
+recipes_dir  = base_dir + os.path.sep + 'recipes'
+docs_dir     = base_dir + os.path.sep + 'docs'
 
 
-def mail_docs(docs_dir):
-    pass
+def mail_docs(docs_dir, user, password, recipient):
+
+    try:
+        yag = yagmail.SMTP(user=user, password=password)
+    except:
+        print('Error while authenticating')
+        return
+
+    for doc in os.listdir(docs_dir):
+        try:
+             yag.send(to=recipient, subject=f'Sending Attachment {doc}', attachments=os.path.join(docs_dir,doc))
+        except:
+             print(f'Error  while sending {doc}')
+
 
 def make_downloads(recipes_dir, docs_dir):
 
@@ -31,4 +43,8 @@ def make_downloads(recipes_dir, docs_dir):
 
 if __name__ == '__main__':
     make_downloads(recipes_dir, docs_dir)
-    mail_docs(docs_dir)
+
+    config = configparser.ConfigParser()
+    config.read( base_dir + os.path.sep + 'config.ini')
+
+    mail_docs(docs_dir, config['MAIL']['user'], config['MAIL']['password'], config['MAIL']['kindlemail'])
