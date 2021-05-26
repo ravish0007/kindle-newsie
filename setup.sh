@@ -45,6 +45,7 @@ done
 
 TEMP_CRON="$DIR/cron"
 
+# change timing according to your convenience and timezone
 echo "0 6 * * *  python3  $DIR/downloader.py" >  $TEMP_CRON
 
 crontab $TEMP_CRON
